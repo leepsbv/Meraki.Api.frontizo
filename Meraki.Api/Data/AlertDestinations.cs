@@ -15,6 +15,13 @@ public class AlertDestinations
 	public List<string>? Emails { get; set; }
 
 	/// <summary>
+	/// A list of phone numbers that will receive text messages about the alert. Only available for sensors status alerts.
+	/// </summary>
+	[ApiAccess(ApiAccess.ReadUpdate)]
+	[DataMember(Name = "smsNumbers")]
+	public List<string>? SmsNumbers { get; set; }
+
+	/// <summary>
 	/// If true, then all network admins will receive emails for this alert
 	/// </summary>
 	/// <value>If true, then all network admins will receive emails for this alert</value>

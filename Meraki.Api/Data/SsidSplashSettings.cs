@@ -19,6 +19,7 @@ public class SsidSplashSettings
 
 	/// <summary>
 	/// Splash timeout in minutes. This will determine how often users will see the splash page.
+	/// Permitted values = [30, 60, 120, 240, 480, 720, 1080, 1440, 2880, 5760, 7200, 10080, 20160, 43200, 86400, 129600]
 	/// </summary>
 	[ApiAccess(ApiAccess.ReadUpdate)]
 	[DataMember(Name = "splashTimeout")]
@@ -72,6 +73,13 @@ public class SsidSplashSettings
 	[ApiAccess(ApiAccess.ReadUpdate)]
 	[DataMember(Name = "useRedirectUrl")]
 	public bool? UseRedirectUrl { get; set; }
+
+	/// <summary>
+	/// Theme ID
+	/// </summary>
+	[ApiAccess(ApiAccess.ReadUpdate)]
+	[DataMember(Name = "themeId")]
+	public string? ThemeId { get; set; }
 
 	/// <summary>
 	/// [optional] Boolean indicating whether the users will be redirected to the custom splash url. A custom splash URL must be set if this is true. Note that depending on your SSID's access control settings, it may not be possible to use the custom splash URL.

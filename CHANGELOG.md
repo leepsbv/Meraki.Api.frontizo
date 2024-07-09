@@ -1,5 +1,24 @@
 ﻿# Changelog
 
+## 1.46.1
+- Added/updated new endpoints. 
+- Some new endpoints with new paging mechanism have not had "Get All" endpoints added until the inconsistencies between the models have been confirmed as intentional by Meraki API developers.
+
+## 1.45.26
+- BREAKING CHANGE : deleteNetworkGroupPolicy now requires a 'force' parameter
+- Updates for 1.45 API changes
+- Added missing member 'host' to organization cloud region.
+
+## 1.43.34
+- SwitchPortType updated to add Stack
+
+## 1.41.8
+- Added Organization Clients search in
+- Updated dependencies
+
+## 1.41.6
+- Updated for 1.41
+
 ## 1.39.1
 - Updated for AlertType motionAlert
 

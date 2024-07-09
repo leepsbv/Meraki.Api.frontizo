@@ -13,13 +13,17 @@ public partial class OrganizationsSection
 
 	public IOrganizationsApiRequests ApiRequests { get; internal set; } = null!;
 
+	public IOrganizationsApplianceSecurityEvents ApplianceSecurityEvents { get; internal set; } = null!;
+
+	public IOrganizationsAssuranceAlerts AssuranceAlerts { get; internal set; } = null!;
+
+	public IOrganizationsClients Clients { get; internal set; } = null!;
+
 	public IOrganizationsConfigTemplates ConfigTemplates { get; internal set; } = null!;
 
 	public IOrganizationsConfigurationChanges ConfigurationChanges { get; internal set; } = null!;
 
 	public IOrganizationsDevices Devices { get; internal set; } = null!;
-
-	public IOrganizationsDevicesAvailabilitiesHistories DevicesAvailabilitiesHistories { get; internal set; } = null!;
 
 	public OrganizationsEarlyAccessSection EarlyAccess { get; internal set; } = new();
 
@@ -43,9 +47,15 @@ public partial class OrganizationsSection
 
 	public IOrganizationsSnmp Snmp { get; internal set; } = null!;
 
+	public IOrganizationsSplash Splash { get; internal set; } = null!;
+
 	public OrganizationsSummarySection Summary { get; internal set; } = new();
 
 	public IOrganizationSwitches Switches { get; internal set; } = null!;
+
+	public IOrganizationsSwitchPortsOverview SwitchPortsOverview { get; internal set; } = null!;
+
+	public IOrganizationsUplinks Uplinks { get; internal set; } = null!;
 
 	public OrganizationsWebhooksSection Webhooks { get; internal set; } = new();
 

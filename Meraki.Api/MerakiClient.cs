@@ -1,4 +1,7 @@
-﻿namespace Meraki.Api;
+﻿using Meraki.Api.Sections.General.LiveTools;
+using Meraki.Api.Sections.Products.Licensing;
+
+namespace Meraki.Api;
 
 /// <summary>
 /// A Meraki Dashboard API client
@@ -63,11 +66,14 @@ public partial class MerakiClient : IDisposable
 				Settings = RefitFor(Organizations.AdaptivePolicy.Settings)
 			},
 			ApiRequests = RefitFor(Organizations.ApiRequests),
+			ApplianceSecurityEvents = RefitFor(Organizations.ApplianceSecurityEvents),
+			AssuranceAlerts = RefitFor(Organizations.AssuranceAlerts),
 			BrandingPolicies = new()
 			{
 				BrandingPolicies = RefitFor(Organizations.BrandingPolicies.BrandingPolicies),
 				Priorities = RefitFor(Organizations.BrandingPolicies.Priorities)
 			},
+			Clients = RefitFor(Organizations.Clients),
 			ConfigurationChanges = RefitFor(Organizations.ConfigurationChanges),
 			ConfigTemplates = RefitFor(Organizations.ConfigTemplates),
 			Devices = RefitFor(Organizations.Devices),
@@ -89,10 +95,13 @@ public partial class MerakiClient : IDisposable
 			},
 			SamlRoles = RefitFor(Organizations.SamlRoles),
 			Snmp = RefitFor(Organizations.Snmp),
+			Splash = RefitFor(Organizations.Splash),
 			Summary = new()
 			{
 				Top = RefitFor(Organizations.Summary.Top)
 			},
+			SwitchPortsOverview = RefitFor(Organizations.SwitchPortsOverview),
+			Uplinks = RefitFor(Organizations.Uplinks),
 			Webhooks = new()
 			{
 				AlertTypes = RefitFor(Organizations.Webhooks.AlertTypes),
@@ -186,6 +195,9 @@ public partial class MerakiClient : IDisposable
 					Statics = RefitFor(Appliance.Prefixes.Delegated.Statics)
 				}
 			},
+			RadioSettings = RefitFor(Appliance.RadioSettings),
+			RfProfiles = RefitFor(Appliance.RfProfiles),
+			SdwanInternetPolices = RefitFor(Appliance.SdwanInternetPolices),
 			Security = new()
 			{
 				Intrusion = RefitFor(Appliance.Security.Intrusion),
@@ -229,7 +241,8 @@ public partial class MerakiClient : IDisposable
 			Uplinks = new()
 			{
 				UsageHistory = RefitFor(Appliance.Uplinks.UsageHistory),
-				Settings = RefitFor(Appliance.Uplinks.Settings)
+				Settings = RefitFor(Appliance.Uplinks.Settings),
+				StatusesOverview = RefitFor(Appliance.Uplinks.StatusesOverview)
 			},
 			Vlans = new()
 			{
@@ -258,7 +271,7 @@ public partial class MerakiClient : IDisposable
 				Recent = RefitFor(Camera.Analytics.Recent),
 				Zones = RefitFor(Camera.Analytics.Zones)
 			},
-
+			Boundaries = RefitFor(Camera.Boundaries),
 			QualityAndRetention = RefitFor(Camera.QualityAndRetention),
 			Sense = new()
 			{
@@ -308,7 +321,6 @@ public partial class MerakiClient : IDisposable
 			Mtu = RefitFor(Switch.Mtu),
 			LinkAggregations = RefitFor(Switch.LinkAggregations),
 			Ports = RefitFor(Switch.Ports),
-			PortsProfiles = RefitFor(Switch.PortsProfiles),
 			PortSchedules = RefitFor(Switch.PortSchedules),
 			QosRules = RefitFor(Switch.QosRules),
 			Routing = new()
@@ -374,6 +386,7 @@ public partial class MerakiClient : IDisposable
 				IdentityPsks = RefitFor(Wireless.Ssids.IdentityPsks),
 				Schedules = RefitFor(Wireless.Ssids.Schedules),
 				Splash = RefitFor(Wireless.Ssids.Splash),
+				Statuses = RefitFor(Wireless.Ssids.Statuses),
 				TrafficShaping = RefitFor(Wireless.Ssids.TrafficShaping),
 				Vpn = RefitFor(Wireless.Ssids.Vpn)
 			},
@@ -388,6 +401,21 @@ public partial class MerakiClient : IDisposable
 				HealthByTime = RefitFor(Insight.Applications.HealthByTime)
 			},
 			MonitoredMediaServers = RefitFor(Insight.MonitoredMediaServers)
+		};
+
+		Licensing = new()
+		{
+			Subscriptions = RefitFor(Licensing.Subscriptions)
+		};
+
+		LiveTools = new()
+		{
+			ArpTable = RefitFor(LiveTools.ArpTable),
+			CableTest = RefitFor(LiveTools.CableTest),
+			Ping = RefitFor(LiveTools.Ping),
+			PingDevice = RefitFor(LiveTools.PingDevice),
+			ThroughputTest = RefitFor(LiveTools.ThroughputTest),
+			WakeOnLan = RefitFor(LiveTools.WakeOnLan)
 		};
 
 		Sensor = new()
@@ -452,6 +480,10 @@ public partial class MerakiClient : IDisposable
 	public DevicesSection Devices { get; } = new();
 
 	public InsightSection Insight { get; } = new();
+
+	public LicensingSection Licensing { get; } = new();
+
+	public LiveToolsSection LiveTools { get; } = new();
 
 	public NetworksSection Networks { get; } = new();
 

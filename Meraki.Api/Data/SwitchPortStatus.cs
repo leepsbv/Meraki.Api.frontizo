@@ -4,7 +4,7 @@
 public class SwitchPortStatus
 {
 	[DataMember(Name = "portId")]
-	public string? PortId { get; set; }
+	public string PortId { get; set; } = string.Empty;
 
 	[DataMember(Name = "enabled")]
 	public bool? Enabled { get; set; }
@@ -47,6 +47,12 @@ public class SwitchPortStatus
 
 	[DataMember(Name = "securePort")]
 	public SwitchPortStatusSecurePort? SecurePort { get; set; }
+
+	[DataMember(Name = "spanningTree")]
+	public SwitchPortStatusSpanningTree? SpanningTree { get; set; }
+
+	[DataMember(Name = "poe")]
+	public SwitchPortStatusPoe? Poe { get; set; }
 }
 
 public class UsageInKb : Usage

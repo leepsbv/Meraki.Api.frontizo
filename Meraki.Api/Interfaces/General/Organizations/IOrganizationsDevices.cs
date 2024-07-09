@@ -100,6 +100,26 @@ public interface IOrganizationsDevices
 		[AliasAs("models[]")] List<string>? models = null,
 		CancellationToken cancellationToken = default);
 
+	[Get("/organizations/{organizationId}/devices")]
+	internal Task<ApiResponse<List<OrganizationDevice>>> GetOrganizationDevicesApiResponseAsync(
+		string organizationId,
+		string? startingAfter = null,
+		string? configurationUpdatedAfter = null,
+		[AliasAs("networksIds[]")] List<string>? networksIds = null,
+		[AliasAs("productTypes[]")] List<string>? productTypes = null,
+		[AliasAs("tags[]")] List<string>? tags = null,
+		string? tagsFilterType = null,
+		string? name = null,
+		string? mac = null,
+		string? serial = null,
+		string? model = null,
+		[AliasAs("macs[]")] List<string>? macs = null,
+		[AliasAs("serials[]")] List<string>? serials = null,
+		[AliasAs("sensorMetrics[]")] List<string>? sensorMetrics = null,
+		[AliasAs("sensorAlertProfileIds[]")] List<string>? sensorAlertProfileIds = null,
+		[AliasAs("models[]")] List<string>? models = null,
+		CancellationToken cancellationToken = default);
+
 	/// <summary>
 	/// Return an overview of current device statuses
 	/// </summary>
@@ -145,5 +165,19 @@ public interface IOrganizationsDevices
 		[AliasAs("productTypes[]")] List<string>? productTypes = null,
 		[AliasAs("tags[]")] List<string>? tags = null,
 		string? tagsFilterType = null,
+		CancellationToken cancellationToken = default);
+
+	/// <summary>
+	/// Lists the count for each device model.
+	/// </summary>
+	/// <exception cref="ApiException">Thrown when fails to make API call</exception>
+	/// <param name="organizationId">The organization id</param>
+	[ApiOperationId("getOrganizationDevicesOverviewByModel")]
+	[Get("/organizations/{organizationId}/devices/overview/byModel")]
+	Task<DevicesOverviewByModel> GetOrganizationDevicesOverviewByModelAsync(
+		string organizationId,
+		[AliasAs("models[]")] List<string>? models = null,
+		[AliasAs("networkIds[]")] List<string>? networkIds = null,
+		[AliasAs("productTypes[]")] List<string>? productTypes = null,
 		CancellationToken cancellationToken = default);
 }

@@ -174,7 +174,16 @@ public class Device : NamedItem
 	/// <summary>
 	/// Imei
 	/// </summary>
+	[Obsolete("Removed in Meraki API v1.46")]
 	[ApiAccess(ApiAccess.Read)]
 	[DataMember(Name = "imei")]
 	public string? Imei { get; set; }
+
+	/// <summary>
+	/// Product type of the device
+	/// </summary>
+	[Obsolete("Removed in Meraki API v1.46")]
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "productType")]
+	public string? ProductType { get; set; }
 }
