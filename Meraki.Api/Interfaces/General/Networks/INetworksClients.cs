@@ -20,6 +20,8 @@ public interface INetworksClients
 	/// <param name="os">Filters clients based on a partial or full match for the os (operating system) field.</param>
 	/// <param name="pskGroup">Filters clients based on partial or full match for the iPSK name field.</param>
 	/// <param name="description">Filters clients based on a partial or full match for the description field.</param>
+	/// <param name="vlan">Filters clients based on the full match for the VLAN field.</param>
+	/// <param name="namedVlan">Filters clients based on the partial or full match for the named VLAN field.</param>
 	/// <param name="recentDeviceConnections">Filters clients based on recent connection type. Can be one of 'Wired' or 'Wireless'.</param>
 	[ApiOperationId("getNetworkClients")]
 	[Get("/networks/{networkId}/clients")]
@@ -39,6 +41,8 @@ public interface INetworksClients
 		string? os = null,
 		string? pskGroup = null,
 		string? description = null,
+		string? vlan = null,
+		string? namedVlan = null,
 		[AliasAs("recentDeviceConnections[]")] List<string>? recentDeviceConnections = null,
 		CancellationToken cancellationToken = default);
 
