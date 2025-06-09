@@ -26,4 +26,11 @@ public class SiteToSiteVpn
 	[ApiAccess(ApiAccess.ReadUpdate)]
 	[DataMember(Name = "subnets")]
 	public List<Subnet> Subnets { get; set; } = [];
+
+	/// <summary>
+	/// Configuration of subnet features
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "subnet")]
+	public SiteToSiteVpnSubnet? Subnet { get; set; }
 }

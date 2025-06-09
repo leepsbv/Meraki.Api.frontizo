@@ -1,17 +1,14 @@
 using FluentAssertions;
 using Meraki.Api.Data;
 using Meraki.Api.Extensions;
+using Newtonsoft.Json;
 using System.Net;
 using Xunit.Abstractions;
 
 namespace Meraki.Api.NewTest;
 [Collection("API Collection")]
-public class NetworkTests : MerakiClientUnitTest
+public class NetworkTests(ITestOutputHelper testOutputHelper) : MerakiClientUnitTest(testOutputHelper)
 {
-	public NetworkTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-	{
-	}
-
 	[Fact]
 	public async Task BasicCrud_Succeeds()
 	{
@@ -111,5 +108,22 @@ public class NetworkTests : MerakiClientUnitTest
 		var network = networks[0];
 		var clients = await TestMerakiClient.Networks.Clients.GetNetworkClientsAllAsync(network.Id, cancellationToken: default);
 		_ = clients.Should().NotBeNull();
+	}
+
+	[Fact]
+	public void Deserialize_ShouldFail_WhenZoneIdIsTooLarge()
+	{
+		// Arrange: JSON with an extremely large number for zoneId
+		var json = @"
+        {
+            ""startTs"": ""2025-03-10T08:00:00Z"",
+            ""endTs"": ""2025-03-10T10:00:00Z"",
+            ""zoneId"": 999999999999999999999999999,
+            ""entrances"": 120,
+            ""averageCount"": 15.7
+        }";
+
+		// Act & Assert: Expect a JsonSerializationException due to number overflow
+		var cameraOverview = JsonConvert.DeserializeObject<CameraOverview>(json);
 	}
 }

@@ -94,11 +94,11 @@ public interface IOrganizationsAssuranceAlerts
 	/// </summary>
 	/// <exception cref="ApiException">Thrown when fails to make API call</exception>
 	/// <param name="organizationId">The organization id</param>
-	/// <param name="cancellationToken">The cancellation token</param>
 	/// <param name="organizationAssuranceAlertsDismiss">The alert ids to be dismissed</param>
+	/// <param name="cancellationToken">The cancellation token</param>
 	[ApiOperationId("dismissOrganizationAssuranceAlerts")]
 	[Post("/organizations/{organizationId}/assurance/alerts/dismiss")]
-	Task dismissOrganizationAssuranceAlertsAsync(
+	Task DismissOrganizationAssuranceAlertsAsync(
 		string organizationId,
 		[Body] OrganizationAssuranceAlertIds organizationAssuranceAlertsDismiss,
 		CancellationToken cancellationToken = default);
@@ -112,7 +112,7 @@ public interface IOrganizationsAssuranceAlerts
 	/// <param name="cancellationToken">The cancellation token</param>
 	[ApiOperationId("restoreOrganizationAssuranceAlerts")]
 	[Post("/organizations/{organizationId}/assurance/alerts/restore")]
-	Task restoreOrganizationAssuranceAlertsAsync(
+	Task RestoreOrganizationAssuranceAlertsAsync(
 		string organizationId,
 		[Body] OrganizationAssuranceAlertIds organizationAssuranceAlertsRestore,
 		CancellationToken cancellationToken = default);
@@ -278,5 +278,4 @@ public interface IOrganizationsAssuranceAlerts
 		[AliasAs("serials[]")] List<string>? serials,
 		[AliasAs("deviceTypes[]")] List<string>? deviceTypes,
 		CancellationToken cancellationToken = default);
-
 }

@@ -1,10 +1,52 @@
-﻿using Meraki.Api.Sections.General.LiveTools;
+﻿using Meraki.Api.Extensions;
+using Meraki.Api.Sections.General.LiveTools;
 using Meraki.Api.Sections.Products.Licensing;
 
 namespace Meraki.Api;
 
 /// <summary>
-/// A Meraki Dashboard API client
+/// A Meraki Dashboard API client. This is your starting point for all API operations.
+/// Example usage:
+/// 
+/// ```csharp
+/// using Meraki.Api;
+/// using System;
+/// using System.Threading.Tasks;
+/// 
+/// namespace My.Project;
+/// public static class Program
+/// {
+///     public static async Task Main()
+///     {
+///         using var merakiClient = new MerakiClient(
+///             new MerakiClientOptions
+///             {
+///                 ApiKey = "0123456789abcdef0123456789abcdef01234567",
+///                 UserAgent = "YourProductName/YourProductVersion YourCompanyName"
+///             }
+///         );
+/// 
+///         var organizations = await merakiClient
+///             .Organizations
+///             .GetOrganizationsAsync()
+///             .ConfigureAwait(false);
+/// 
+///         var firstOrganization = organizations[0];
+/// 
+///         var devices = await merakiClient
+///             .Organizations
+///             .Devices
+///             .GetOrganizationDevicesAsync(firstOrganization.Id)
+///             .ConfigureAwait(false);
+/// 
+///         Console.WriteLine("Devices:");
+///         foreach (var device in devices)
+///         {
+///             Console.WriteLine($"    - {device.Serial}: {device.Name}");
+///         }
+///     }
+/// }
+/// ```
 /// </summary>
 public partial class MerakiClient : IDisposable
 {
@@ -22,8 +64,6 @@ public partial class MerakiClient : IDisposable
 	/// <summary>
 	/// A Meraki portal client
 	/// </summary>
-	/// <param name="options"></param>
-	/// <param name="logger"></param>
 	public MerakiClient(MerakiClientOptions options, ILogger? logger = default)
 	{
 		var apiClientVersion = new System.Version(ThisAssembly.AssemblyFileVersion);
@@ -32,9 +72,13 @@ public partial class MerakiClient : IDisposable
 		_options = options;
 		_logger = logger ?? NullLogger.Instance;
 		_httpClientHandler = new AuthenticatedBackingOffHttpClientHandler(options ?? throw new ArgumentNullException(nameof(options)), this, _logger);
+
+		var merakiDomain = options.ApiRegion.GetMerakiApiDomain()
+			?? throw new ArgumentOutOfRangeException($"Unsupported API Region {options.ApiRegion}");
+
 		_httpClient = new HttpClient(_httpClientHandler)
 		{
-			BaseAddress = new Uri($"https://{options.ApiNode ?? "api"}.meraki.com/api/v1"),
+			BaseAddress = new Uri($"https://{options.ApiNode ?? "api"}.{merakiDomain}/api/v1"),
 			Timeout = TimeSpan.FromSeconds(options.HttpClientTimeoutSeconds)
 		};
 		_refitSettings = new RefitSettings
@@ -100,6 +144,7 @@ public partial class MerakiClient : IDisposable
 			{
 				Top = RefitFor(Organizations.Summary.Top)
 			},
+			Switches = RefitFor(Organizations.Switches),
 			SwitchPortsOverview = RefitFor(Organizations.SwitchPortsOverview),
 			Uplinks = RefitFor(Organizations.Uplinks),
 			Webhooks = new()
@@ -210,6 +255,7 @@ public partial class MerakiClient : IDisposable
 			{
 				Subnets = RefitFor(Appliance.Dhpc.Subnets)
 			},
+			DnsLocalProfiles = RefitFor(Appliance.DnsLocalProfiles),
 			Firewall = new()
 			{
 				CellularFirewallRules = RefitFor(Appliance.Firewall.CellularFirewallRules),
@@ -218,6 +264,7 @@ public partial class MerakiClient : IDisposable
 				InboundFirewallRules = RefitFor(Appliance.Firewall.InboundFirewallRules),
 				L3FirewallRules = RefitFor(Appliance.Firewall.L3FirewallRules),
 				L7FirewallRules = RefitFor(Appliance.Firewall.L7FirewallRules),
+				MulticastForwarding = RefitFor(Appliance.Firewall.MulticastForwarding),
 				OneToManyNatRules = RefitFor(Appliance.Firewall.OneToManyNatRules),
 				OneToOneNatRules = RefitFor(Appliance.Firewall.OneToOneNatRules),
 				PortForwardingRules = RefitFor(Appliance.Firewall.PortForwardingRules),
@@ -296,6 +343,7 @@ public partial class MerakiClient : IDisposable
 		{
 			ConnectivityMonitoringDestinations = RefitFor(CellularGateway.ConnectivityMonitoringDestinations),
 			Dhcp = RefitFor(CellularGateway.Dhcp),
+			Esims = RefitFor(CellularGateway.Esims),
 			Lan = RefitFor(CellularGateway.Lan),
 			PortForwardingRules = RefitFor(CellularGateway.PortForwardingRules),
 			SubnetPool = RefitFor(CellularGateway.SubnetPool),

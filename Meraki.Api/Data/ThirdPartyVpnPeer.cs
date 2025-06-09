@@ -6,6 +6,10 @@ namespace Meraki.Api.Data;
 [DataContract]
 public class ThirdPartyVpnPeer : NamedItem
 {
+	[ApiKey]
+	[DataMember(Name = "peerId")]
+	public string? PeerId { get; set; }
+
 	/// <summary>
 	/// The public IP of the VPN peer
 	/// </summary>
@@ -68,4 +72,39 @@ public class ThirdPartyVpnPeer : NamedItem
 	[ApiAccess(ApiAccess.ReadUpdate)]
 	[DataMember(Name = "networkTags")]
 	public List<string>? NetworkTags { get; set; }
+
+	/// <summary>
+	/// Undocumented 2024-10-21
+	/// </summary>
+	[ApiAccess(ApiAccess.ReadUpdate)]
+	[DataMember(Name = "isRouteBased")]
+	public bool? IsRouteBased { get; set; }
+
+	/// <summary>
+	/// Undocumented 2024-10-22
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "network")]
+	public ThirdPartyVpnPeerNetwork? Network { get; set; }
+
+	/// <summary>
+	/// Undocumented 2025-01-13
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "priorityInGroup")]
+	public int? priorityInGroup { get; set; }
+
+	/// <summary>
+	/// Undocumented 2025-02-21
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "publicHostname")]
+	public string? PublicHostname { get; set; }
+
+	/// <summary>
+	/// Undocumented 2025-02-21
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "group")]
+	public ThirdPartyVpnPeerGroup? Group { get; set; }
 }

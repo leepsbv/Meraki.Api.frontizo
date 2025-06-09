@@ -12,12 +12,25 @@ using System.Diagnostics.CodeAnalysis;
 	"CA1707:Identifiers should not contain underscores",
 	Justification = "Useful for unit tests",
 	Scope = "namespaceanddescendants",
-	Target = "~N:Meraki.Api.Test")
-]
+	Target = "~N:Meraki.Api.Test"
+)]
 [assembly: SuppressMessage(
 	"Reliability",
 	"CA2007:Consider calling ConfigureAwait on the awaited task",
-	Justification = "<Pending>",
+	Justification = "Fine for unit tests",
 	Scope = "namespaceanddescendants",
-	Target = "~N:Meraki.Api.Test")
-]
+	Target = "~N:Meraki.Api.Test"
+)]
+[assembly: SuppressMessage(
+	"Design",
+	"CA1031:Do not catch general exception types",
+	Justification = "Fine for unit tests",
+	Scope = "namespaceanddescendants",
+	Target = "~N:Meraki.Api.Test"
+)]
+[assembly: SuppressMessage(
+	"Maintainability",
+	"CA1515:Consider making public types internal",
+	Justification = "This class needs to be public due to inheritance",
+	Scope = "type",
+	Target = "~T:Meraki.Api.Test.MerakiClientTest")]

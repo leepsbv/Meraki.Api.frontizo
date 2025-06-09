@@ -8,13 +8,14 @@ This project implements access to the v1 Meraki API
 To use the Meraki API nuget package:
 
 ## Visual Studio
+
 1. Open your project in Visual Studio
 1. Right-click on the project and click "Manage Nuget packages"
 1. Find the package "Meraki.Api.Frontizo" - install the latest version
 
 ## Example code (C# 11)
 
-``` C#
+```C#
 using Meraki.Api;
 using System;
 using System.Threading.Tasks;
@@ -59,11 +60,13 @@ namespace My.Project
 ## API Documentation
 
 The Meraki API documentation can be found here:
+
 - [Meraki API Documentation v1](https://developer.cisco.com/meraki/api-v1/)
 
 ## Testing
 
 You can test this using a Meraki Sandbox here:
+
 - [Meraki Always On](https://devnetsandbox.cisco.com/RM/Diagram/Index/a9487767-deef-4855-b3e3-880e7f39eadc?diagramType=Topology)
 - [Meraki Enterprise](https://devnetsandbox.cisco.com/RM/Diagram/Index/e7b3932b-0d47-408e-946e-c23a0c031bda?diagramType=Topology)
 - [Meraki Small Business](https://devnetsandbox.cisco.com/RM/Diagram/Index/aa48e6e2-3e59-4b87-bfe5-7833c45f8db8?diagramType=Topology)

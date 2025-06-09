@@ -6,7 +6,10 @@ public static class DeviceExtensions
 	{
 		var deviceModelUpper = device.Model?.ToUpperInvariant();
 
-		return deviceModelUpper == "UMB-SIG"
+		return deviceModelUpper == "CPSC-HUB"
+				? ModelType.CiscoSecureConnect
+				:
+				deviceModelUpper == "UMB-SIG"
 				? ModelType.Appliance
 				: deviceModelUpper?.Length >= 2
 					? deviceModelUpper.Substring(0, 2) switch
@@ -16,7 +19,7 @@ public static class DeviceExtensions
 						"MS" => ModelType.Switch,
 						"SM" => ModelType.MobileDeviceManagement,
 						"MG" => ModelType.Cellular,
-						"MX" or "Z3" or "Z4"=> ModelType.Appliance,
+						"MX" or "Z3" or "Z4" => ModelType.Appliance,
 						"MV" => ModelType.Camera,
 						"MT" => ModelType.Sensor,
 						// We didn't manage to match on the first two characters

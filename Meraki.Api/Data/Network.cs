@@ -57,13 +57,6 @@ public class Network : NetworkOrConfigurationTemplate
 	public string? EnrollmentString { get; set; }
 
 	/// <summary>
-	/// URL
-	/// </summary>
-	[ApiAccess(ApiAccess.Read)]
-	[DataMember(Name = "url")]
-	public string? Url { get; set; }
-
-	/// <summary>
 	/// IsBoundToConfigTemplate
 	/// </summary>
 	[ApiAccess(ApiAccess.Read)]
@@ -71,7 +64,7 @@ public class Network : NetworkOrConfigurationTemplate
 	public bool? IsBoundToConfigTemplate { get; set; }
 
 	/// <summary>
-	/// IsVirtual - undocumented
+	/// IsVirtual
 	/// </summary>
 	[ApiAccess(ApiAccess.Read)]
 	[DataMember(Name = "isVirtual")]

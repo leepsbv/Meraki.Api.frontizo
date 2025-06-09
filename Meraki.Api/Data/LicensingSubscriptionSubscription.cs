@@ -18,7 +18,14 @@ public class LicensingSubscriptionSubscription
 	/// </summary>
 	[ApiAccess(ApiAccess.Read)]
 	[DataMember(Name = "endDate")]
-	public string EndDate { get; set; } = string.Empty;
+	public DateTime EndDate { get; set; }
+
+	/// <summary>
+	/// When the subscription was last changed
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "lastUpdatedAt")]
+	public DateTime LastUpdatedAt { get; set; }
 
 	/// <summary>
 	/// Subscription name
@@ -28,11 +35,19 @@ public class LicensingSubscriptionSubscription
 	public string Name { get; set; } = string.Empty;
 
 	/// <summary>
+	/// Smart account status
+	/// </summary>
+	[Obsolete("Removed in Merak API v 1.53")]
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "smartAccountStatus")]
+	public string SmartAccountStatus { get; set; } = string.Empty;
+
+	/// <summary>
 	/// Subscription start date
 	/// </summary>
 	[ApiAccess(ApiAccess.Read)]
 	[DataMember(Name = "startDate")]
-	public string StartDate { get; set; } = string.Empty;
+	public DateTime StartDate { get; set; }
 
 	/// <summary>
 	/// Subscription Status
@@ -56,6 +71,13 @@ public class LicensingSubscriptionSubscription
 	public string WebOrderId { get; set; } = string.Empty;
 
 	/// <summary>
+	/// Whether a renewal has been requested for the subscription
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "renewalRequested")]
+	public bool RenewalRequested { get; set; }
+
+	/// <summary>
 	/// Web order id
 	/// </summary>
 	[ApiAccess(ApiAccess.Read)]
@@ -68,6 +90,20 @@ public class LicensingSubscriptionSubscription
 	[ApiAccess(ApiAccess.Read)]
 	[DataMember(Name = "counts")]
 	public LicensingSubscriptionClaimCounts Counts { get; set; } = new();
+
+	/// <summary>
+	/// Enterprise agreement details
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "enterpriseAgreement")]
+	public LicensingSubscriptionClaimEnterpriseAgreement EnterpriseAgreement { get; set; } = new();
+
+	/// <summary>
+	/// Smart account
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "smartAccount")]
+	public LicensingSubscriptionClaimSmartAccount SmartAccount { get; set; } = new();
 
 	/// <summary>
 	/// Entitlement info

@@ -7,6 +7,13 @@
 public class ChangeLogEntry
 {
 	/// <summary>
+	/// Client information
+	/// </summary>
+	[ApiAccess(ApiAccess.Read)]
+	[DataMember(Name = "client")]
+	public ApiUsageClient? Client { get; set; }
+
+	/// <summary>
 	/// The Timestamp
 	/// </summary>
 	[ApiAccess(ApiAccess.Read)]

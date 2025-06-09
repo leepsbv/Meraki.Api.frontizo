@@ -259,6 +259,13 @@ public class SsidUpdateRequest
 	public int? RadiusRadsecTlsIdleTimeout { get; set; }
 
 	/// <summary>
+	/// The current settings for RADIUS RADSec
+	/// </summary>
+	[ApiAccess(ApiAccess.ReadUpdate)]
+	[DataMember(Name = "radiusRadsec")]
+	public SsidUpdateRequestRadiusRadsec? RadiusRadsec { get; set; }
+
+	/// <summary>
 	/// Whether or not RADIUS Guest VLAN is enabled. This param is only valid if the authMode is 'open-with-radius' and addressing mode is not set to 'isolated' or 'nat' mode
 	/// </summary>
 	[ApiAccess(ApiAccess.ReadUpdate)]
